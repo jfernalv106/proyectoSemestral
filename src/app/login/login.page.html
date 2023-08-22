@@ -1,10 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Login Header</ion-title>
+    <ion-title>TeLlevoApp</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
+
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large" style="text-align: center;">TeLlevoApp</ion-title>
@@ -12,12 +13,22 @@
   </ion-header>
 
   <div>
+    <ion-row style="height: 20px"></ion-row>
+    <ion-img src="assets\icon\logo.png"></ion-img>
+  </div>
+
+  <div>
     <div>
-      <ion-row style="height: 100px"></ion-row>
-      <ion-label class="center-content">Cargar Credenciales</ion-label>
+      <ion-row style="height: 20px"></ion-row>
+      <ion-label class="center-content">Comparte tus viajes!!!</ion-label>
       <ion-row style="height: 50px"></ion-row>
-      <ion-input class="center-content" label="Uauario" [(ngModel)]="userLoginModal.usuario"></ion-input>
-      <ion-input class="center-content" label="Contraseña" [(ngModel)]="userLoginModal.pass"></ion-input>
+
+      <ion-input label="Usuario" label-placement="floating" fill="solid" placeholder="Ingresar nombre Usuario" [(ngModel)]="userLoginModal.usuario" ></ion-input>
+
+    <br />
+
+      <ion-input label="Contraseña" label-placement="floating" fill="solid" type="password" placeholder="Ingresar Contraseña" [(ngModel)]="userLoginModal.pass"></ion-input>
+
     </div>
 
     <ion-row style="height: 20px"></ion-row>
@@ -29,6 +40,7 @@
       <ion-button color="success" (click)="userLogin(userLoginModal)">Ingresar</ion-button>
     </div>
   </div>
+
 </ion-content>
 
 <!--
