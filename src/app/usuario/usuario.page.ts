@@ -28,4 +28,8 @@ export class UsuarioPage implements OnInit {
   ngOnInit() {
   }
 
+  cerrarSesion(){
+    this.router.navigate(['/login']);
+  }
+
 }

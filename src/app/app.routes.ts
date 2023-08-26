@@ -10,7 +10,11 @@ export const routes: Routes = [
     loadComponent: () => import('./usuario/usuario.page').then( m => m.UsuarioPage)
   },
   {
+    path: 'registrarusuario',
+    loadComponent: () => import('./registrarusuario/registrarusuario.page').then( m => m.RegistrarusuarioPage)
+  },
+  {
     path: '**',
     redirectTo: 'login'
-  }
+  },
 ];

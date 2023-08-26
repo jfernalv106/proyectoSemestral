@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Usuario Page</ion-title>
+    <ion-title>Pagina de Usuario</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,7 +9,7 @@
   <h1 class="center-content" style="padding-bottom: 50px">Bienvenido {{ userInfoReceived?.nombre }} {{ userInfoReceived?.apellido }} </h1>
   <ion-list [inset]="true">
     <ion-list-header>
-      <ion-label>User Information: </ion-label>
+      <ion-label>Información del Usuario: </ion-label>
     </ion-list-header>
     <ion-item>
       <ion-label>Usuario: {{ userInfoReceived?.usuario }}</ion-label>
@@ -30,7 +30,8 @@
     <!--
       Navigación con una función.
     -->
-    <ion-button color="success" >Ingresar</ion-button>
+    <ion-button expand="full" color="danger" (click) = "cerrarSesion()">Cerrar Sesion</ion-button>
+    
   </div>
 
 </ion-content>

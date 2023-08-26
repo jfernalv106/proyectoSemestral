@@ -58,6 +58,11 @@ export class LoginPage implements OnInit {
 
   }
 
+  crearUsuario() {
+    this.route.navigate(['/registrarusuario']);
+  }
+
+
   userLoginModalRestart(): void {
     this.userLoginModal.usuario = '';
     this.userLoginModal.pass = '';
