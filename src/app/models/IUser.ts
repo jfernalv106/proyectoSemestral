@@ -5,4 +5,8 @@ export interface IUser {
     mail: string;
     usuario: string;
     pass: string;
+    marcaVehiculo: string;
+    modeloVehiculo: string;
+    color: string;
+    patente: string;
 }

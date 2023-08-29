@@ -7,6 +7,10 @@ export class UserModel {
         public tipo: string,
         public usuario: string,
         public pass: string,
+        public marcaVehiculo: string,
+        public modeloVehiculo: string,
+        public color: string,
+        public patente: string,
     ) {
     }
 

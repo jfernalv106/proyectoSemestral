@@ -17,10 +17,11 @@ import { UsuarioPage } from '../usuario/usuario.page';
 export class LoginPage implements OnInit {
 
   listUser: UserModel[] = [
-    new UserModel('George', 'Campos', 'gcampos@gmail.com', 'USUARIO', 'gcampos', '123456'),
-    new UserModel('Lucila', 'Julio', 'ljulio@gmail.com', 'ADMIN', 'ljulio', '123456'),
-    new UserModel('Mickaella', 'Silva', 'msilva@gmail.com', 'USUARIO', 'msilva', '123456'),
-    new UserModel('Juan', 'Soto', 'jsoto@gmail.com', 'ADMIN', 'jsoto', '123456'),
+    new UserModel('George', 'Campos', 'gcampos@gmail.com', 'CONDUCTOR', 'gcampos', '123456', 'Nissan', 'March', 'Rojo', 'FGTR43'),
+    new UserModel('George', 'Campos', 'gcampos@gmail.com', 'PASAJERO', 'gcampos', '123456', 'Nissan', 'March', 'Rojo', 'FGTR43'),
+    new UserModel('Lucila', 'Julio', 'ljulio@gmail.com', 'PASAJERO', 'ljulio', '123456', '', '', '', ''),
+    new UserModel('Mickaella', 'Silva', 'msilva@gmail.com', 'CONDUCTOR', 'msilva', '123456', 'Suzuki', 'Jimmy', 'Verde', 'YRPF78'),
+    new UserModel('Juan', 'Soto', 'jsoto@gmail.com', 'ADMIN', 'PASAJERO', '123456', '', '', '', ''),
   ];
 
   userLoginModal: IUserLogin = {
@@ -38,17 +39,21 @@ export class LoginPage implements OnInit {
 
     for (let i = 0; i < this.listUser.length; i++) {
       if ((this.listUser[i].usuario == userLoginInfo.usuario) && (this.listUser[i].pass == userLoginInfo.pass)) {
-        console.log('User Loged...', this.userLoginModal.usuario, this.userLoginModal.pass);
+        console.log('Usuario logeado...', this.userLoginModal.usuario, this.userLoginModal.pass);
         let userInfoSend: NavigationExtras = {
           state: {
             user: this.listUser[i]
           }
         }
-        if (this.listUser[i].tipo == 'USUARIO') {
+
+
+
+
+        if (this.listUser[i].tipo == 'CONDUCTOR') {
           let sendInfo = this.route.navigate(['/usuario'], userInfoSend);
           return true;
         } else {
-          let sendInfo = this.route.navigate(['/admin'], userInfoSend);
+          let sendInfo = this.route.navigate(['/pasajero'], userInfoSend);
           return true;
         }
       }
