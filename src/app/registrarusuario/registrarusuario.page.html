@@ -6,21 +6,30 @@
 
 <ion-content [fullscreen]="true" color="light">
 
-  <h1 class="center-content" style="padding-bottom: 50px">Datos del nuevo usuario</h1>
+  <h1 class="center-content">Datos del nuevo usuario</h1>
   <ion-list [inset]="true">
+    <ion-list>
+      <ion-item>
+        <ion-select aria-label="Perfil" placeholder="Selecciona perfil">
+          <ion-select-option value="CONDUCTOR">Conductor</ion-select-option>
+          <ion-select-option value="PASAJERO">Pasajero</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
     <ion-input label="Nombre de Usuario" label-placement="floating" fill="solid"
       placeholder="Ingresar nombre de Usuario"></ion-input>
-      <ion-input label="Nombre alumno" label-placement="floating" fill="solid"
+    <ion-input label="Ingresar contraseña" label-placement="floating" fill="solid" placeholder="Contraseña"
+      type="password"></ion-input>
+    <ion-input label="Nombre alumno" label-placement="floating" fill="solid"
       placeholder="Ingresar nombre alumno"></ion-input>
-      <ion-input label="Apelido alumno" label-placement="floating" fill="solid"
+    <ion-input label="Apelido alumno" label-placement="floating" fill="solid"
       placeholder="Ingresar apellido alumno"></ion-input>
-      <ion-input label="Marca Vehiculo" label-placement="floating" fill="solid"
+    <ion-input label="Marca Vehiculo" label-placement="floating" fill="solid"
       placeholder="Ingresar marca vehiculo"></ion-input>
-      <ion-input label="Modelo Vehiculo" label-placement="floating" fill="solid"
+    <ion-input label="Modelo Vehiculo" label-placement="floating" fill="solid"
       placeholder="Ingresar modelo vehiculo"></ion-input>
-      <ion-input label="Color" label-placement="floating" fill="solid"
-      placeholder="Ingresar color vehiculo"></ion-input>
-      <ion-input label="Patente" label-placement="floating" fill="solid"
+    <ion-input label="Color" label-placement="floating" fill="solid" placeholder="Ingresar color vehiculo"></ion-input>
+    <ion-input label="Patente" label-placement="floating" fill="solid"
       placeholder="Ingresar patente vehiculo"></ion-input>
   </ion-list>
 

@@ -18,6 +18,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pasajero/pasajero.page').then(m => m.PasajeroPage)
   },
   {
+    path: 'restablecercontrasena',
+    loadComponent: () => import('./restablecercontrasena/restablecercontrasena.page').then( m => m.RestablecercontrasenaPage)
+  },
+  {
     path: '**',
     redirectTo: 'login'
   },

@@ -13,7 +13,6 @@
   </ion-header>
 
   <div>
-    <ion-row style="height: 20px"></ion-row>
     <ion-img src="assets\icon\logo.png"></ion-img>
   </div>
 
@@ -46,18 +45,11 @@
     <ion-row style="height: 20px"></ion-row>
 
     <div style="text-align: center;">
-      <ion-button color="success" (click)="userLogin(userLoginModal)">Ingresar</ion-button>
+      <ion-button expand="full" color="success" (click)="userLogin(userLoginModal)">Ingresar</ion-button>
       <br/>
       <br/>
-      <ion-button (click)="crearUsuario()" color="secondary">Crear Cuenta</ion-button>
-      
-
+      <ion-button (click)="crearUsuario()" color="secondary">Crear Cuenta</ion-button>  <ion-button (click)="recuperarContrasena()" color="warning">Recuperar Contraseña</ion-button>
     </div>
   </div>
 
 </ion-content>
-
-<!--
-  Docs
-  https://ionicframework.com/docs/angular/navigation
--->

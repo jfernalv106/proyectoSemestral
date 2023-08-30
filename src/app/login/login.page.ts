@@ -66,6 +66,9 @@ export class LoginPage implements OnInit {
     this.route.navigate(['/registrarusuario']);
   }
 
+  recuperarContrasena() {
+    this.route.navigate(['/restablecercontrasena']);
+  }
 
   userLoginModalRestart(): void {
     this.userLoginModal.usuario = '';

@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Pagina para recuperar contraseña</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="light">
+
+  <h1 class="center-content" style="padding-bottom: 50px">Bienvenido {{ userInfoReceived?.nombre }} {{
+    userInfoReceived?.apellido }} </h1>
+  <ion-list [inset]="true">
+    <ion-list-header>
+      <ion-label style="color: dodgerblue">Ingresar datos de usuario: </ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-input fill="solid" label="Nombre de usuario" labelPlacement="floating" type="usuario" ngModel usuario></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="email" fill="solid" label="Email" labelPlacement="floating" helperText="Ingrese mail valido"
+        errorText="Invalid email" ngModel email></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <div style="text-align: center;">
+
+    <ion-button expand="full" color="success" (click)="salir()">Enviar contraseña al mail</ion-button>
+    <br/>
+    <ion-button expand="full" color="danger" (click)="salir()">Salir</ion-button>
+
+  </div>
+
+</ion-content>
