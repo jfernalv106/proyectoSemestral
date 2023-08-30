@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { UserModel } from '../models/UserModel';
 import { NavigationExtras, Router, RouterLinkWithHref } from '@angular/router';
 import { IUserLogin } from '../models/IUserLogin';
-import { UsuarioPage } from '../usuario/usuario.page';
 
 @Component({
   selector: 'app-login',
@@ -46,8 +45,6 @@ export class LoginPage implements OnInit {
           }
         }
 
-
-        
         if (this.listUser[i].tipo == 'CONDUCTOR') {
           let sendInfo = this.route.navigate(['/usuario'], userInfoSend);
           return true;

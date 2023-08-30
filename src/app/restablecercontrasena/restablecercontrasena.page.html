@@ -1,9 +1,3 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Pagina para recuperar contraseña</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true" color="light">
 
   <h1 class="center-content" style="padding-bottom: 50px">Bienvenido {{ userInfoReceived?.nombre }} {{
@@ -24,7 +18,6 @@
   <div style="text-align: center;">
 
     <ion-button expand="full" color="success" (click)="salir()">Enviar contraseña al mail</ion-button>
-    <br/>
     <ion-button expand="full" color="danger" (click)="salir()">Salir</ion-button>
 
   </div>
