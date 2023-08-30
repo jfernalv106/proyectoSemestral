@@ -47,8 +47,7 @@ export class LoginPage implements OnInit {
         }
 
 
-
-
+        
         if (this.listUser[i].tipo == 'CONDUCTOR') {
           let sendInfo = this.route.navigate(['/usuario'], userInfoSend);
           return true;
