@@ -4,7 +4,7 @@
   <ion-list [inset]="true">
     <ion-list>
       <ion-item>
-        <ion-select aria-label="Perfil" placeholder="Selecciona perfil">
+        <ion-select (ionChange)="seleccion($event)" aria-label="Perfil" placeholder="Selecciona perfil">
           <ion-select-option value="CONDUCTOR">Conductor</ion-select-option>
           <ion-select-option value="PASAJERO">Pasajero</ion-select-option>
         </ion-select>

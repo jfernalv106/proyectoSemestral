@@ -17,6 +17,8 @@ export class RegistrarusuarioPage implements OnInit {
   userInfoReceived: UserModel | undefined;
   idUserHtmlRouterLink: any;
 
+  tipoPerfil!: string;
+
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.userInfoReceived = this.router.getCurrentNavigation()?.extras.state?.['user'];
     // Si quiero obtener un valor por URL usando routerLink
@@ -34,6 +36,12 @@ export class RegistrarusuarioPage implements OnInit {
 
   salir(){
     this.router.navigate(['/login']);
+
+  }
+
+  seleccion(ev: any) {
+    this.tipoPerfil = ev.target.value;
+    console.log(this.tipoPerfil)
   }
 
 }

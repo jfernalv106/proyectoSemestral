@@ -28,6 +28,10 @@ export class LoginPage implements OnInit {
     pass: ''
   };
 
+  tipoPerfil!: string;
+
+  public alertButtons = ['OK'];
+
   constructor(private route: Router) { }
 
   ngOnInit() {
@@ -45,31 +49,45 @@ export class LoginPage implements OnInit {
           }
         }
 
-        if (this.listUser[i].tipo == 'CONDUCTOR') {
+        console.log(this.tipoPerfil)
+
+        if (this.tipoPerfil != 'CONDUCTOR' && this.tipoPerfil != 'PASAJERO') {
+          this.alertButtons;
+        }
+
+        if (this.listUser[i].tipo == 'CONDUCTOR' && this.tipoPerfil == 'CONDUCTOR') {
           let sendInfo = this.route.navigate(['/usuario'], userInfoSend);
+          this.userLoginModalRestart();
           return true;
-        } else {
+        } else if (this.listUser[i].tipo == 'PASAJERO' && this.tipoPerfil == 'PASAJERO') {
           let sendInfo = this.route.navigate(['/pasajero'], userInfoSend);
+          this.userLoginModalRestart();
           return true;
         }
       }
     }
-    this.userLoginModalRestart();
     return false;
 
   }
 
   crearUsuario() {
     this.route.navigate(['/registrarusuario']);
+    this.userLoginModalRestart();
   }
 
   recuperarContrasena() {
     this.route.navigate(['/restablecercontrasena']);
+    this.userLoginModalRestart();
   }
 
   userLoginModalRestart(): void {
     this.userLoginModal.usuario = '';
     this.userLoginModal.pass = '';
+  }
+
+  seleccion(ev: any) {
+    this.tipoPerfil = ev.target.value;
+    console.log(this.tipoPerfil)
   }
 
 }
