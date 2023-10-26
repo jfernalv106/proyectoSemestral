@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { UserModel } from '../models/UserModel';
+import { UsuarioModel } from '../models/UsuarioModel';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class PasajeroPage implements OnInit {
 
-  userInfoReceived: UserModel | undefined;
+  userInfoReceived: UsuarioModel | undefined;
   idUserHtmlRouterLink: any;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {

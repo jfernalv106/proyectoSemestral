@@ -1,73 +1,97 @@
-import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { CommonModule, NgFor, NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { UserModel } from '../models/UserModel';
 import { NavigationExtras, Router, RouterLinkWithHref } from '@angular/router';
-import { IUserLogin } from '../models/IUserLogin';
+import { UsuarioModel } from '../models/UsuarioModel';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from '../services/user-service';
+import { Observable, Subscription } from 'rxjs';
+import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, RouterLinkWithHref, FormsModule]
+  imports: [IonicModule, CommonModule, RouterLinkWithHref, FormsModule, HttpClientModule, NgFor, NgForOf],
+  providers: [UserService]
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, OnDestroy {
 
-  listUser: UserModel[] = [
-    new UserModel('George', 'Campos', 'gcampos@gmail.com', 'CONDUCTOR', 'gcampos', '123456', 'Nissan', 'March', 'Rojo', 'FGTR43'),
-    new UserModel('George', 'Campos', 'gcampos@gmail.com', 'PASAJERO', 'gcampos', '123456', 'Nissan', 'March', 'Rojo', 'FGTR43'),
-    new UserModel('Lucila', 'Julio', 'ljulio@gmail.com', 'PASAJERO', 'ljulio', '123456', '', '', '', ''),
-    new UserModel('Mickaella', 'Silva', 'msilva@gmail.com', 'CONDUCTOR', 'msilva', '123456', 'Suzuki', 'Jimmy', 'Verde', 'YRPF78'),
-    new UserModel('Juan', 'Soto', 'jsoto@gmail.com', 'ADMIN', 'PASAJERO', '123456', '', '', '', ''),
-  ];
-
-  userLoginModal: IUserLogin = {
-    usuario: '',
+  userLoginModal: UsuarioModel = {
+    nombre_usuario: '',
     pass: ''
   };
+
+  public userExists?: UsuarioModel;
+  public userList$!: Subscription;
+  public userList: UsuarioModel[] = [];
 
   tipoPerfil!: string;
 
   public alertButtons = ['OK'];
 
-  constructor(private route: Router) { }
+  constructor(private route: Router, private _usuarioService: UserService) {
+  }
+
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
+  }
 
   ngOnInit() {
     this.userLoginModalRestart();
   }
 
-  userLogin(userLoginInfo: IUserLogin): boolean {
+  async setObject(user: UsuarioModel) {
+    await Preferences.set({
+      key: 'user',
+      value: JSON.stringify(user)
+    });
+  }
 
-    for (let i = 0; i < this.listUser.length; i++) {
-      if ((this.listUser[i].usuario == userLoginInfo.usuario) && (this.listUser[i].pass == userLoginInfo.pass)) {
-        console.log('Usuario logeado...', this.userLoginModal.usuario, this.userLoginModal.pass);
-        let userInfoSend: NavigationExtras = {
-          state: {
-            user: this.listUser[i]
+  async userLogin(userLoginInfo: UsuarioModel) {
+    this._usuarioService.getLoginUser(userLoginInfo.nombre_usuario ?? '', userLoginInfo.pass ?? '').subscribe(
+      {
+        next: (user) => {
+          console.log(user);
+
+          if (this.tipoPerfil != 'CONDUCTOR' && this.tipoPerfil != 'PASAJERO') {
+            this.alertButtons;
           }
-        }
 
-        console.log(this.tipoPerfil)
+          console.log(this.tipoPerfil)
 
-        if (this.tipoPerfil != 'CONDUCTOR' && this.tipoPerfil != 'PASAJERO') {
-          this.alertButtons;
-        }
+          if (user.length > 0) {
+            //EXISTE
+            let userInfoSend: NavigationExtras = {
+              state: {
+                userInfo: user[0].nombre
+              }
+            }
+            console.log("Usuario existe...");
+            this.setObject(user[0]);
+            if (user[0].tipo_usuario == 1 && this.tipoPerfil == 'CONDUCTOR') {
+              this.route.navigate(['/usuario'], userInfoSend)
+              this.userLoginModalRestart();
+            } else
+              if (user[0].tipo_usuario == 2 && this.tipoPerfil == 'PASAJERO') {
+                let sendInfo = this.route.navigate(['/pasajero'], userInfoSend);
+                this.userLoginModalRestart();
+              }
+          } else {
+            //NO EXISTE
+            console.log("Usuario no existe...");
+          }
+        },
+        error: (err) => {
 
-        if (this.listUser[i].tipo == 'CONDUCTOR' && this.tipoPerfil == 'CONDUCTOR') {
-          let sendInfo = this.route.navigate(['/usuario'], userInfoSend);
-          this.userLoginModalRestart();
-          return true;
-        } else if (this.listUser[i].tipo == 'PASAJERO' && this.tipoPerfil == 'PASAJERO') {
-          let sendInfo = this.route.navigate(['/pasajero'], userInfoSend);
-          this.userLoginModalRestart();
-          return true;
+        },
+        complete: () => {
+
         }
       }
-    }
-    return false;
-
+    )
   }
 
   crearUsuario() {
@@ -81,7 +105,7 @@ export class LoginPage implements OnInit {
   }
 
   userLoginModalRestart(): void {
-    this.userLoginModal.usuario = '';
+    this.userLoginModal.nombre_usuario = '';
     this.userLoginModal.pass = '';
   }
 
@@ -91,3 +115,4 @@ export class LoginPage implements OnInit {
   }
 
 }
+

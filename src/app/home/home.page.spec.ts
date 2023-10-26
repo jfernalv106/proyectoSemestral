@@ -8,7 +8,6 @@ describe('HomePage', () => {
 
   beforeEach(async () => {
     await TestBed
-      .configureTestingModule()
       .compileComponents();
 
     fixture = TestBed.createComponent(HomePage);
