@@ -77,8 +77,6 @@ export class LoginPage implements OnInit {
             alert('Debe seleccionar perfil');
           }
 
-          console.log(this.tipoPerfil)
-
           if (user.length > 0) {
             //EXISTE
             let userInfoSend: NavigationExtras = {
@@ -89,11 +87,11 @@ export class LoginPage implements OnInit {
             
             console.log("Usuario existe...", userInfoSend);
             this.setObject(user[0]);
-            if (user[0].tipo_usuario.id == 1 && this.tipoPerfil == 'CONDUCTOR') {
+            if (user[0].tipo_usuario == 1 && this.tipoPerfil == 'CONDUCTOR') {
               this.route.navigate(['/usuario'], userInfoSend)
               this.userLoginModalRestart();
             } else
-              if (user[0].tipo_usuario.id == 2 && this.tipoPerfil == 'PASAJERO') {
+              if (user[0].tipo_usuario == 2 && this.tipoPerfil == 'PASAJERO') {
                 let sendInfo = this.route.navigate(['/pasajero'], userInfoSend);
                 this.userLoginModalRestart();
               }

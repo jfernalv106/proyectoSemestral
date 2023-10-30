@@ -9,5 +9,5 @@ export interface UsuarioModel {
     mail: string
     nombre_usuario: string
     pass: string
-    tipo_usuario: TipoUsuarioModel
+    tipo_usuario: number
 }
