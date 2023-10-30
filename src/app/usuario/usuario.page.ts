@@ -20,8 +20,8 @@ export class UsuarioPage implements OnInit {
   idUserHtmlRouterLink: any;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
-    this.userInfoReceived = this.router.getCurrentNavigation()?.extras.state?.['user'];
-    this.vehiculoInfoReceived = this.router.getCurrentNavigation()?.extras.state?.['user'];
+    this.userInfoReceived = this.router.getCurrentNavigation()?.extras.state?.['userInfo'];
+    this.vehiculoInfoReceived = this.router.getCurrentNavigation()?.extras.state?.['userInfo'];
     // Si quiero obtener un valor por URL usando routerLink
     this.idUserHtmlRouterLink = this.activatedRoute.snapshot.params['id'];
     // Obteniendo el ID podria buscar en algún arreglo o BD el usuario con el id

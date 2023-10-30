@@ -6,7 +6,7 @@ import { NavigationExtras, Router, RouterLinkWithHref } from '@angular/router';
 import { UsuarioModel } from '../models/UsuarioModel';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../services/user-service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, firstValueFrom } from 'rxjs';
 import { Preferences } from '@capacitor/preferences';
 
 @Component({
@@ -28,6 +28,8 @@ export class LoginPage implements OnInit, OnDestroy {
   public userList$!: Subscription;
   public userList: UsuarioModel[] = [];
 
+  pasajeroLogeado: any;
+
   tipoPerfil!: string;
 
   public alertButtons = ['OK'];
@@ -36,11 +38,12 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+
   }
 
   ngOnInit() {
     this.userLoginModalRestart();
+
   }
 
   async setObject(user: UsuarioModel) {
@@ -51,7 +54,7 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   async userLogin(userLoginInfo: UsuarioModel) {
-    this._usuarioService.getLoginUser(userLoginInfo.nombre_usuario ?? '', userLoginInfo.pass ?? '').subscribe(
+    this._usuarioService.getLoginUser(userLoginInfo.nombre_usuario, userLoginInfo.pass).subscribe(
       {
         next: (user) => {
           console.log(user);
@@ -66,10 +69,10 @@ export class LoginPage implements OnInit, OnDestroy {
             //EXISTE
             let userInfoSend: NavigationExtras = {
               state: {
-                userInfo: user[0].nombre
+                userInfo: user[0]
               }
             }
-            console.log("Usuario existe...");
+            console.log("Usuario existe...", userInfoSend);
             this.setObject(user[0]);
             if (user[0].tipo_usuario == 1 && this.tipoPerfil == 'CONDUCTOR') {
               this.route.navigate(['/usuario'], userInfoSend)
