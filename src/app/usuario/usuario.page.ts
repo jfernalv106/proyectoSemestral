@@ -16,12 +16,12 @@ import { VehiculoModel } from '../models/VehiculoModel';
 export class UsuarioPage implements OnInit {
 
   userInfoReceived: UsuarioModel | undefined;
-  vehiculoInfoReceived: VehiculoModel | undefined;
+  //vehiculoInfoReceived: VehiculoModel | undefined;
   idUserHtmlRouterLink: any;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.userInfoReceived = this.router.getCurrentNavigation()?.extras.state?.['userInfo'];
-    this.vehiculoInfoReceived = this.router.getCurrentNavigation()?.extras.state?.['userInfo'];
+    ///this.vehiculoInfoReceived = this.router.getCurrentNavigation()?.extras.state?.['vehiculoInfo'];
     // Si quiero obtener un valor por URL usando routerLink
     this.idUserHtmlRouterLink = this.activatedRoute.snapshot.params['id'];
     // Obteniendo el ID podria buscar en algún arreglo o BD el usuario con el id

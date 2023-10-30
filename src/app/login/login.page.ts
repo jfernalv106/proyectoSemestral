@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../services/user-service';
 import { Observable, Subscription, firstValueFrom } from 'rxjs';
 import { Preferences } from '@capacitor/preferences';
+import { VehiculoModel } from '../models/VehiculoModel';
 
 @Component({
   selector: 'app-login',
@@ -17,11 +18,16 @@ import { Preferences } from '@capacitor/preferences';
   imports: [IonicModule, CommonModule, RouterLinkWithHref, FormsModule, HttpClientModule, NgFor, NgForOf],
   providers: [UserService]
 })
-export class LoginPage implements OnInit, OnDestroy {
+export class LoginPage implements OnInit {
 
   userLoginModal: UsuarioModel = {
     nombre_usuario: '',
-    pass: ''
+    pass: '',
+    id: 0,
+    nombre: '',
+    apellido: '',
+    mail: '',
+    tipo_usuario:null
   };
 
   public userExists?: UsuarioModel;
@@ -53,6 +59,13 @@ export class LoginPage implements OnInit, OnDestroy {
     });
   }
 
+  async setVehiculoObject(vehiculo: VehiculoModel) {
+    await Preferences.set({
+      key: 'vehiculo',
+      value: JSON.stringify(vehiculo)
+    });
+  }
+
   async userLogin(userLoginInfo: UsuarioModel) {
     this._usuarioService.getLoginUser(userLoginInfo.nombre_usuario, userLoginInfo.pass).subscribe(
       {
@@ -61,6 +74,7 @@ export class LoginPage implements OnInit, OnDestroy {
 
           if (this.tipoPerfil != 'CONDUCTOR' && this.tipoPerfil != 'PASAJERO') {
             this.alertButtons;
+            alert('Debe seleccionar perfil');
           }
 
           console.log(this.tipoPerfil)
@@ -72,18 +86,20 @@ export class LoginPage implements OnInit, OnDestroy {
                 userInfo: user[0]
               }
             }
+            
             console.log("Usuario existe...", userInfoSend);
             this.setObject(user[0]);
-            if (user[0].tipo_usuario == 1 && this.tipoPerfil == 'CONDUCTOR') {
+            if (user[0].tipo_usuario.id == 1 && this.tipoPerfil == 'CONDUCTOR') {
               this.route.navigate(['/usuario'], userInfoSend)
               this.userLoginModalRestart();
             } else
-              if (user[0].tipo_usuario == 2 && this.tipoPerfil == 'PASAJERO') {
+              if (user[0].tipo_usuario.id == 2 && this.tipoPerfil == 'PASAJERO') {
                 let sendInfo = this.route.navigate(['/pasajero'], userInfoSend);
                 this.userLoginModalRestart();
               }
           } else {
             //NO EXISTE
+            alert('Usuario o Contraseña no validos');
             console.log("Usuario no existe...");
           }
         },
@@ -97,9 +113,9 @@ export class LoginPage implements OnInit, OnDestroy {
     )
   }
 
-  crearUsuario() {
+  crearUsuario(): void {
     this.route.navigate(['/registrarusuario']);
-    this.userLoginModalRestart();
+    //this.userLoginModalRestart();
   }
 
   recuperarContrasena() {

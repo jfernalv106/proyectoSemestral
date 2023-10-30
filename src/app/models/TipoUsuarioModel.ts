@@ -1,6 +1,6 @@
 export interface TipoUsuarioModel {
 
-    id?: number;
-    descripcion_usuario?: string;
+    id: number;
+    descripcion_usuario: string;
 
 }
