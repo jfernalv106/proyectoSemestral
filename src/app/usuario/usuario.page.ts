@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { UsuarioModel } from '../models/UsuarioModel';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VehiculoModel } from '../models/VehiculoModel';
+import { UserService } from '../services/user-service';
 
 @Component({
   selector: 'app-usuario',
@@ -15,23 +16,33 @@ import { VehiculoModel } from '../models/VehiculoModel';
 })
 export class UsuarioPage implements OnInit {
 
-  userInfoReceived: UsuarioModel | undefined;
-  //vehiculoInfoReceived: VehiculoModel | undefined;
-  idUserHtmlRouterLink: any;
+  userInfoReceived: UsuarioModel | any | undefined;
+  userId!: any;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private x: UserService, private router: Router, private activatedRoute: ActivatedRoute) {
+    //Recibir ID del usuario logeado
     this.userInfoReceived = this.router.getCurrentNavigation()?.extras.state?.['userInfo'];
-    ///this.vehiculoInfoReceived = this.router.getCurrentNavigation()?.extras.state?.['vehiculoInfo'];
-    // Si quiero obtener un valor por URL usando routerLink
-    this.idUserHtmlRouterLink = this.activatedRoute.snapshot.params['id'];
-    // Obteniendo el ID podria buscar en algún arreglo o BD el usuario con el id
-    console.log("Valor obtenido desde URL: ",this.idUserHtmlRouterLink);
-   }
+    console.log(this.userInfoReceived);
 
-  ngOnInit() {
   }
 
-  cerrarSesion(){
+  ngOnInit() {
+    //FUNCIONES PARA BUSCAR INFOMACION SOBRE EL ID DEL USUARIO LOGEADO
+
+    this.x.traerInfoUsuarioLogeado(this.userInfoReceived).subscribe(
+      (data)=>{
+        console.log('la data es:' + data) ;
+      }
+    );
+
+    if (this.userInfoReceived.tipo_usuario = 1) {
+
+      const auto = this.userInfoReceived.vehiculo.marca_vehiculo + this.userInfoReceived.vehiculo.modelo_vehiculo + this.userInfoReceived.vehiculo.color_vehiculo;
+
+    }
+
+  }
+  cerrarSesion() {
     this.router.navigate(['/login']);
   }
 

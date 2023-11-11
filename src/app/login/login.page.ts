@@ -27,7 +27,8 @@ export class LoginPage implements OnInit {
     nombre: '',
     apellido: '',
     mail: '',
-    tipo_usuario:null
+    tipo_usuario: null,
+    vehiculo: null
   };
 
   public userExists?: UsuarioModel;
@@ -81,10 +82,11 @@ export class LoginPage implements OnInit {
             //EXISTE
             let userInfoSend: NavigationExtras = {
               state: {
-                userInfo: user[0]
+                //ENVIAR SOLO ID
+                userInfo: user[0].id
               }
             }
-            
+
             console.log("Usuario existe...", userInfoSend);
             this.setObject(user[0]);
             if (user[0].tipo_usuario == 1 && this.tipoPerfil == 'CONDUCTOR') {
