@@ -1,4 +1,3 @@
-import { TipoUsuarioModel } from "./TipoUsuarioModel";
 import { VehiculoModel } from "./VehiculoModel";
 
 export interface UsuarioModel {
