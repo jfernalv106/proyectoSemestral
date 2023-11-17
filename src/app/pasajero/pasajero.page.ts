@@ -36,6 +36,7 @@ export class PasajeroPage implements OnInit {
         this.cargando = false;
       }
     );
+    
    
    }
 
